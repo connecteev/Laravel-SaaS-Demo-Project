@@ -15,12 +15,29 @@ STRIPE_SECRET=
 (stripe keys from https://dashboard.stripe.com/test/apikeys)
 
 You will need 3 products to be set up in Stripe with a pricing plan under each of them
-Go here to set up https://dashboard.stripe.com/test/products
-Make sure the Stripe plan IDs match the plan IDs under product. Example: https://dashboard.stripe.com/test/plans/yearly_plan
+# Go here to set up https://dashboard.stripe.com/test/products and for each product, you must have a plan.
+# Most important: Make sure the details match with what is in Stripe
+# Stripe plan IDs MUST match the plan IDs under product. Example: https://dashboard.stripe.com/test/plans/yearly_plan
+# The prices must match the prices in Stripe, otherwise billing math will be way off.
+# The billing period also needs to match what is in Stripe, otherwise customers may get billed incorrectly.
 
+PLAN_1_ENABLED=1
+STRIPE_NAME_PLAN_1="Monthly Plan"
+STRIPE_PRICE_PLAN_1=14900
 STRIPE_ID_PLAN_1=monthly_plan
+STRIPE_BILLING_PERIOD_PLAN_1=monthly
+
+PLAN_2_ENABLED=1
+STRIPE_NAME_PLAN_2="Yearly Plan"
+STRIPE_PRICE_PLAN_2=120000
 STRIPE_ID_PLAN_2=yearly_plan
+STRIPE_BILLING_PERIOD_PLAN_2=yearly
+
+PLAN_3_ENABLED=1
+STRIPE_NAME_PLAN_3="Forever Plan"
+STRIPE_PRICE_PLAN_3=500000
 STRIPE_ID_PLAN_3=forever_plan
+STRIPE_BILLING_PERIOD_PLAN_3=
 
 (mail settings for sending email)
 MAIL_DRIVER=smtp
