@@ -7,30 +7,18 @@ class PlansTableSeeder extends Seeder
 {
     public function run()
     {
-        $plans = [
-            [
-                'name'              => 'Bronze Plan',
-                'price'             => 999,
-                'stripe_plan_id'    => '',
-                'created_at'        => now(),
-                'billing_period'    => 'monthly',
-            ],
-            [
-                'name'              => 'Silver Plan',
-                'price'             => 1999,
-                'stripe_plan_id'    => '',
-                'created_at'        => now(),
-                'billing_period'    => 'monthly',
-            ],
-            [
-                'name'              => 'Gold Plan',
-                'price'             => 2999,
-                'stripe_plan_id'    => '',
-                'created_at'        => now(),
-                'billing_period'    => 'monthly',
-            ],
-        ];
-
+        $plans = [];
+        for ($planId=1; $planId<=5; $planId++) {
+            if (env('PLAN_' . $planId . '_ENABLED')) {
+                $plans[] = [
+                    'name'              => env('STRIPE_NAME_PLAN_' . $planId),
+                    'price'             => env('STRIPE_PRICE_PLAN_' . $planId),
+                    'stripe_plan_id'    => env('STRIPE_ID_PLAN_' . $planId),
+                    'created_at'        => now(),
+                    'billing_period'    => env('STRIPE_BILLING_PERIOD_PLAN_' . $planId),
+                ];
+            }
+        }
         Plan::insert($plans);
     }
 }

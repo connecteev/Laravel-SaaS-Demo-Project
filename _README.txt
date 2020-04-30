@@ -5,7 +5,7 @@ Installation:
 (because there are some commits I made to it)
 and NOT https://github.com/LaravelDaily/Laravel-SaaS-Demo-Project
 
-2. cp .env.example .env 
+2. cp .env.example .env
 
 3. edit .env and add the following settings:
 DB_DATABASE=laravel_saas_demo_project_laraveldaily_stripe_subscriptions
@@ -13,6 +13,24 @@ DB_DATABASE=laravel_saas_demo_project_laraveldaily_stripe_subscriptions
 STRIPE_KEY=
 STRIPE_SECRET=
 (stripe keys from https://dashboard.stripe.com/test/apikeys)
+
+You will need 3 products to be set up in Stripe with a pricing plan under each of them
+Go here to set up https://dashboard.stripe.com/test/products
+Make sure the Stripe plan IDs match the plan IDs under product. Example: https://dashboard.stripe.com/test/plans/yearly_plan
+
+STRIPE_ID_PLAN_1=monthly_plan
+STRIPE_ID_PLAN_2=yearly_plan
+STRIPE_ID_PLAN_3=forever_plan
+
+(mail settings for sending email)
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=f6654ef6db0675
+MAIL_PASSWORD=cb9de536150f4f
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=kunal@keenbrain.com
+MAIL_FROM_NAME='Kunal at KeenBrain'
 
 4. create db named: laravel_saas_demo_project_laraveldaily_stripe_subscriptions)
 5. run: composer install
