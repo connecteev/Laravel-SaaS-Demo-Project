@@ -83,6 +83,7 @@
                         <thead>
                             <tr>
                                 <th>Brand</th>
+                                <th>Last 4 Digits</th>
                                 <th>Expires at</th>
                                 <th></th>
                             </tr>
@@ -90,7 +91,8 @@
                         <tbody>
                         @foreach ($paymentMethods as $paymentMethod)
                             <tr>
-                                <td>{{ $paymentMethod->card->brand }}</td>
+                            <td>{{ $paymentMethod->card->brand }}</td>
+                            <td>{{ $paymentMethod->card->last4 }}</td>
                                 <td>{{ $paymentMethod->card->exp_month }} / {{ $paymentMethod->card->exp_year }}</td>
                                 <td>
                                     @if ($defaultPaymentMethod->id == $paymentMethod->id)
