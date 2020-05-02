@@ -16,8 +16,11 @@ class CheckoutController extends Controller
         $countries = Country::all();
 
         $currentPlan = auth()->user()->subscription('default')->stripe_plan ?? NULL;
-        if (!is_null($currentPlan) && $currentPlan != $plan->stripe_plan_id) {
-            auth()->user()->subscription('default')->swap($plan->stripe_plan_id);
+
+        if (!is_null($currentPlan)) {
+            if ($currentPlan != $plan->stripe_plan_id) {
+                auth()->user()->subscription('default')->swap($plan->stripe_plan_id);
+            }
             return redirect()->route('billing');
         }
 
