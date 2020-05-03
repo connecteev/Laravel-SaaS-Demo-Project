@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">My Plan</div>
-
                 <div class="card-body">
                     @if (session('message'))
                         <div class="alert alert-info">{{ session('message') }}</div>
@@ -16,7 +15,7 @@
                         You are now on Free Plan. Please choose plan to upgrade:
                         <br /><br />
                     @elseif ($currentPlan->trial_ends_at)
-                        <div class="alert alert-info">Your trial will end on {{ $currentPlan->trial_ends_at->toDateString() }} and your card will be charged.</div>
+                        <div class="alert alert-info">Your trial will end on {{ $currentPlan->trial_ends_at->isoFormat('MMMM Do, YYYY') }}. Your card will be charged then.</div>
                         <br /><br />
                     @endif
                         <div class="row">

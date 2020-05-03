@@ -7,6 +7,7 @@ use App\Plan;
 use Illuminate\Http\Request;
 use Stripe\Coupon;
 use Stripe\Stripe;
+use Illuminate\Support\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -38,11 +39,19 @@ class CheckoutController extends Controller
     {
         $plan = Plan::findOrFail($request->input('billing_plan_id'));
         try {
-            auth()->user()->newSubscription('default', $plan->stripe_plan_id)
-                ->withCoupon($request->input('coupon'))
+            $loggedinUser = auth()->user();
+            if (!$loggedinUser) {
+                return redirect()->route('billing')->withMessage('Sorry. You need to be logged in to do that!');
+            }
+            $newSubscription = $loggedinUser->newSubscription('default', $plan->stripe_plan_id);
+            if ($plan->free_trial_days > 0) {
+                $newSubscription->trialDays($plan->free_trial_days);
+            }
+            $newSubscription->withCoupon($request->input('coupon'))
                 ->create($request->input('payment-method'));
-            auth()->user()->update([
-                'trial_ends_at' => NULL,
+
+            $loggedinUser->update([
+                'trial_ends_at' => $plan->free_trial_days > 0 ? Carbon::now()->addDays($plan->free_trial_days) : NULL,
                 'company_name' => $request->input('company_name'),
                 'address_line_1' => $request->input('address_line_1'),
                 'address_line_2' => $request->input('address_line_2'),

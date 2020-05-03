@@ -14,6 +14,7 @@ class PlansTableSeeder extends Seeder
                     'name'              => env('STRIPE_NAME_PLAN_' . $planId),
                     'price'             => env('STRIPE_PRICE_PLAN_' . $planId),
                     'stripe_plan_id'    => env('STRIPE_ID_PLAN_' . $planId),
+                    'free_trial_days'   => env('STRIPE_FREE_TRIAL_DAYS_PLAN_' . $planId),
                     'created_at'        => now(),
                     'billing_period'    => env('STRIPE_BILLING_PERIOD_PLAN_' . $planId),
                 ];

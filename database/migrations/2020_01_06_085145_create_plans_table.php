@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->string('stripe_plan_id');
+            $table->integer('free_trial_days');
             $table->timestamps();
         });
     }
